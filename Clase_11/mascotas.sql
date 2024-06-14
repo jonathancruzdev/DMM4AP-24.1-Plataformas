@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-06-2024 a las 17:41:25
+-- Tiempo de generación: 14-06-2024 a las 18:00:52
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -32,18 +32,19 @@ CREATE TABLE `mascotas` (
   `nombre` varchar(64) NOT NULL,
   `fotoURL` varchar(256) NOT NULL,
   `likes` int(11) NOT NULL,
-  `descripcion` varchar(1024) NOT NULL
+  `descripcion` varchar(1024) NOT NULL,
+  `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `mascotas`
 --
 
-INSERT INTO `mascotas` (`id_mascota`, `nombre`, `fotoURL`, `likes`, `descripcion`) VALUES
-(1, 'mellis', 'images/foto1.jpg', 5, 'Descripción de mi mascota Mellis'),
-(2, 'Tomy', 'images/foto2.jpg', 200, 'texto de descripción'),
-(3, 'Pocho', 'images/foto3.jpg', 50, 'algo '),
-(4, 'Chapi', 'images/foto4.jpg', 56, '............');
+INSERT INTO `mascotas` (`id_mascota`, `nombre`, `fotoURL`, `likes`, `descripcion`, `id_usuario`) VALUES
+(1, 'mellis', 'images/foto1.jpg', 5, 'Descripción de mi mascota Mellis', 1),
+(2, 'Tomy', 'images/foto2.jpg', 200, 'texto de descripción', 1),
+(3, 'Pocho', 'images/foto3.jpg', 50, 'algo ', 2),
+(4, 'Chapi', 'images/foto4.jpg', 56, '............', 2);
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `clave`) VALUES
 (1, 'juan', 'juan@gmail.com', '1234'),
 (2, 'Julieta', '', '1234'),
 (3, 'Josefina', 'josefina@gmail.com', '00000'),
-(4, 'Mateo', 'mateo@gmail.com', '1234');
+(4, 'Mateo', 'mateo@gmail.com', '1234'),
+(5, 'Rocio', 'rocio@gmail.com', '1234');
 
 --
 -- Índices para tablas volcadas
@@ -76,7 +78,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `clave`) VALUES
 -- Indices de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  ADD PRIMARY KEY (`id_mascota`);
+  ADD PRIMARY KEY (`id_mascota`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -98,7 +101,17 @@ ALTER TABLE `mascotas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `mascotas`
+--
+ALTER TABLE `mascotas`
+  ADD CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
