@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2024 a las 18:00:52
+-- Tiempo de generación: 28-06-2024 a las 18:19:20
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -20,6 +20,36 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `mascotas`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_comentario` int(11) NOT NULL,
+  `detalle` varchar(128) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_mascota` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_comentario`, `detalle`, `id_usuario`, `id_mascota`) VALUES
+(1, '0', 6, 3),
+(2, '0', 6, 3),
+(3, '0', 6, 3),
+(4, '0', 6, 3),
+(5, 'dsds', 6, 3),
+(6, 'otra cosas', 6, 3),
+(7, 'Que lindo perro', 6, 4),
+(8, ':D', 6, 4),
+(9, 'dsdasdsa', 6, 4),
+(10, 'dsadasdasdas', 6, 4),
+(11, 'dasdasdas', 6, 4);
 
 -- --------------------------------------------------------
 
@@ -44,7 +74,7 @@ INSERT INTO `mascotas` (`id_mascota`, `nombre`, `fotoURL`, `likes`, `descripcion
 (1, 'mellis', 'images/foto1.jpg', 5, 'Descripción de mi mascota Mellis', 1),
 (2, 'Tomy', 'images/foto2.jpg', 200, 'texto de descripción', 1),
 (3, 'Pocho', 'images/foto3.jpg', 50, 'algo ', 2),
-(4, 'Chapi', 'images/foto4.jpg', 56, '............', 2);
+(4, 'Chapi', 'images/foto4.jpg', 56, '............ hola soy Chapi', 2);
 
 -- --------------------------------------------------------
 
@@ -68,11 +98,18 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `clave`) VALUES
 (2, 'Julieta', '', '1234'),
 (3, 'Josefina', 'josefina@gmail.com', '00000'),
 (4, 'Mateo', 'mateo@gmail.com', '1234'),
-(5, 'Rocio', 'rocio@gmail.com', '1234');
+(5, 'Rocio', 'rocio@gmail.com', '1234'),
+(6, 'Emanuel', 'emanuel@mail.com', '1234');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentario`);
 
 --
 -- Indices de la tabla `mascotas`
@@ -92,6 +129,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
@@ -101,7 +144,7 @@ ALTER TABLE `mascotas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
